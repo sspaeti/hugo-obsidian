@@ -1,5 +1,5 @@
 # Obsidian Link Scraper
-Used by [Quartz](https://github.com/jackyzha0/quartz)
+Used by [Quartz](https://github.com/jackyzha0/quartz/hugo) -> My latest Quartz v3+my addtions are on [sspaeti/second-brain-public](https://github.com/sspaeti/second-brain-public).
 
 This repository comes to you in two parts.
 
@@ -13,7 +13,7 @@ Read Markdown from the `/content` folder and place the resulting `linkIndex.json
 
 ```shell
 # Installation
-go install github.com/jackyzha0/hugo-obsidian@latest
+go install github.com/sspaeti/hugo-obsidian@latest
 
 # Run
 hugo-obsidian -input=content -output=data -index=true
@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Link Index
-        uses: jackyzha0/hugo-obsidian@v2.1
+        uses: sspaeti/hugo-obsidian@latest
         with:
           input: content # input folder
           output: data   # output folder
