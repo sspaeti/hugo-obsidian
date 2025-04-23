@@ -34,11 +34,18 @@ func parse(dir, pathPrefix string) []Link {
 			target = "#"
 		}
 
-		target = processTarget(target)
+		// Extract the base target without any block references
+		baseTarget := target
+		if blockRefIndex := strings.Index(target, "^"); blockRefIndex != -1 {
+			baseTarget = target[:blockRefIndex]
+		}
+
+		target = processTarget(baseTarget)
 		source := processSource(trim(dir, pathPrefix, ".md"))
 
-		// fmt.Printf("  '%s' => %s\n", source, target)
-		if !strings.HasPrefix(text, "^"){
+		// Don't skip links with block references in the text
+		// Only skip ones that are just a block reference (^...)
+		if !strings.HasPrefix(text, "^") || strings.Contains(text, " ") {
 			links = append(links, Link{
 				Source: source,
 				Target: target,

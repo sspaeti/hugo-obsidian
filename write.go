@@ -72,23 +72,20 @@ func writeLinkMap(contentIndex *ContentIndex, root string) error {
 
 // constructs index from links
 func index(links []Link) (index Index) {
-	linkMap := make(map[string][]Link)
-	backlinkMap := make(map[string][]Link)
+	// Pre-allocate maps with reasonable capacity to avoid resizing
+	linkMap := make(map[string][]Link, 2000)
+	backlinkMap := make(map[string][]Link, 2000)
+	
+	// Use a more efficient approach to building the maps
 	for _, l := range links {
-		// backlink (only if internal)
-		if _, ok := backlinkMap[l.Target]; ok {
-			backlinkMap[l.Target] = append(backlinkMap[l.Target], l)
-		} else {
-			backlinkMap[l.Target] = []Link{l}
-		}
-
-		// regular link
-		if _, ok := linkMap[l.Source]; ok {
-			linkMap[l.Source] = append(linkMap[l.Source], l)
-		} else {
-			linkMap[l.Source] = []Link{l}
-		}
+		// Regular links - store by source
+		linkMap[l.Source] = append(linkMap[l.Source], l)
+		
+		// Backlinks - store by target (only if internal)
+		// This creates a reverse index from target to sources
+		backlinkMap[l.Target] = append(backlinkMap[l.Target], l)
 	}
+	
 	index.Links = linkMap
 	index.Backlinks = backlinkMap
 	return index

@@ -38,3 +38,14 @@ jobs:
           index: true    # whether to index content
       ...
 ```
+
+
+## Changelog
+
+### 2025-04-23
+
+  1. Fixed case sensitivity: Both processTarget and processSource now convert links to lowercase, ensuring that capitalization differences (like "Semantic Layer" vs "semantic layer") don't cause missed links.
+  2. Improved block reference handling: The code now properly extracts the base path from links that include block references (like [[Semantic Layer^SOMEHASH]]), ensuring the link is properly registered.
+  3. Added special character handling: Added specific handling for titles with slashes, replacing " / " with "-" to ensure consistency between file paths and link references.
+  4. Optimized for large vaults: Pre-allocated maps with larger capacities and simplified the mapping logic to better handle large numbers of links.
+

@@ -23,16 +23,26 @@ func processTarget(source string) string {
 	if strings.HasPrefix(source, "/") {
 		return strings.TrimSuffix(source, ".md")
 	}
+	// Handle case sensitivity and anchor fragments
 	res := strings.Split(source, "#")[0]
+	// Convert to lowercase for case-insensitive matching
+	res = strings.ToLower(res)
 	res = "/" + strings.TrimSuffix(strings.TrimSuffix(res, ".html"), ".md")
 	res, _ = url.PathUnescape(res)
 	res = strings.TrimSpace(res)
+	
+	// Special handling for title slashes that might be in links
+	res = strings.ReplaceAll(res, " / ", "-")
 	res = UnicodeSanitize(res)
 	return strings.ReplaceAll(url.PathEscape(res), "%2F", "/")
 }
 
 func processSource(source string) string {
 	res := filepath.ToSlash(hugoPathTrim(source))
+	// Convert to lowercase for consistent matching
+	res = strings.ToLower(res)
+	// Special handling for title slashes that might be in links
+	res = strings.ReplaceAll(res, " / ", "-")
 	res = UnicodeSanitize(res)
 	return strings.ReplaceAll(url.PathEscape(res), "%2F", "/")
 }
