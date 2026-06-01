@@ -4,12 +4,13 @@
 build:
 	go build -o hugo-obsidian-dev
 
-# Install the binary to ~/.go/bin
 install: build
-	cp hugo-obsidian-dev $(HOME)/.go/bin/hugo-obsidian-dev
+	cp hugo-obsidian-dev $(HOME)/go/bin/hugo-obsidian-dev
 
 install-prod: build
-	cp hugo-obsidian-dev $(HOME)/.go/bin/hugo-obsidian
+	cp hugo-obsidian-dev $(HOME)/go/bin/hugo-obsidian
+	cp hugo-obsidian-dev $(HOME)/.local/bin/hugo-obsidian
+
 
 # Run the program with default settings
 run: build

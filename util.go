@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"unicode"
 )
@@ -12,8 +13,12 @@ func trim(source, prefix, suffix string) string {
 	return strings.TrimPrefix(strings.TrimSuffix(source, suffix), prefix)
 }
 
+var indexSuffixRe = regexp.MustCompile(`/index(\.\w{2})?$`)
+
 func hugoPathTrim(source string) string {
-	return strings.TrimSuffix(strings.TrimSuffix(source, "/index"), "_index")
+	// Strip /index, /index.en, /index.de, etc. and _index variants
+	source = indexSuffixRe.ReplaceAllString(source, "")
+	return strings.TrimSuffix(source, "_index")
 }
 
 func processTarget(source string) string {
