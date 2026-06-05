@@ -1,4 +1,8 @@
 # Obsidian Link Scraper
+
+> [!CAUTION]
+> This fork has moved to my [second-brain-public](https://github.com/sspaeti/second-brain-public/tree/hugo/utils/hugo-obsidian) as it's the only place I used it and I can integrate better. All in one place. So see there for the latest.
+
 Used by [Quartz](https://github.com/jackyzha0/quartz/hugo) -> My latest Quartz v3+my addtions are on [sspaeti/second-brain-public](https://github.com/sspaeti/second-brain-public).
 
 This repository comes to you in two parts.
