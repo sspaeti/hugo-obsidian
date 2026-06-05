@@ -42,6 +42,12 @@ jobs:
 
 ## Changelog
 
+### 2026-06-05
+
+- Added enrichment of Blogs and Book articles, see
+    - [enrich_with_blog.rs](https://github.com/sspaeti/second-brain-public/blob/hugo/utils/obsidian-quartz/src/enrich_with_blog.rs)
+    - [enrich_with_book.rs](https://github.com/sspaeti/second-brain-public/blob/hugo/utils/obsidian-quartz/src/enrich_with_book.rs)
+
 ### 2025-04-23
 
   1. Fixed case sensitivity: Both processTarget and processSource now convert links to lowercase, ensuring that capitalization differences (like "Semantic Layer" vs "semantic layer") don't cause missed links.
